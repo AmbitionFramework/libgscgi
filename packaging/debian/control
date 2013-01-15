@@ -1,0 +1,15 @@
+Source: libgscgi
+Section: unknown
+Priority: extra
+Maintainer: Nicholas Melnick <nick@abstractwankery.com>
+Build-Depends: debhelper (>= 8.0.0), valac-0.14, libglib2.0-dev, gcc, make
+Standards-Version: 3.9.3
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Git: git://git.debian.org/collab-maint/libgscgi.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/libgscgi.git;a=summary
+
+Package: libgscgi
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0
+Description: SCGI library for GObject
+ SCGI library for GObject

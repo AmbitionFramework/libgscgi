@@ -1,0 +1,11 @@
+Package: libgscgi
+Version: 0.1
+Architecture: amd64
+Maintainer: Nicholas Melnick <nick@abstractwankery.com>
+Installed-Size: 26
+Depends: libglib2.0
+Section: unknown
+Priority: extra
+Homepage: <insert the upstream URL, if relevant>
+Description: SCGI library for GObject
+ SCGI library for GObject
