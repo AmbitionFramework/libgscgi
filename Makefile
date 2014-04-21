@@ -1,4 +1,10 @@
-PREFIX ?= /usr
+ifeq ($(DESTDIR),)
+else
+PREFIX = $(DESTDIR)
+endif
+ifeq ($(PREFIX),)
+PREFIX = /usr
+endif
 LIBDIR ?=
 ifeq ($(LIBDIR),)
 ARCHBSZ= $(shell echo $(HOST_ARCH) | sed -e 's/.*64.*/64b/')
@@ -32,7 +38,7 @@ install: $(LIBRARY) libgscgi-1.0.deps
 	@install -m 644 libgscgi-1.0.h $(PREFIX)/include/
 	@install -m 644 libgscgi-1.0.vapi $(PREFIX)/share/vala/vapi
 	@install -m 644 libgscgi-1.0.deps $(PREFIX)/share/vala/vapi
-	@sed -e 's/@LIBDIR@/\$(PREFIX)\/$(LIB_DIR)/' -e 's/@INCLUDEDIR@/\$(PREFIX)\/include/' libgscgi-1.0.pc.in > $(PREFIX)/share/pkgconfig/libgscgi-1.0.pc
+	@sed -e 's/@LIBDIR@/$(subst /,\/,$(PREFIX))\/$(LIB_DIR)/' -e 's/@INCLUDEDIR@/$(subst /,\/,$(PREFIX))\/include/' libgscgi-1.0.pc.in > $(PREFIX)/share/pkgconfig/libgscgi-1.0.pc
 
 uninstall:
 	@echo "Uninstalling"
