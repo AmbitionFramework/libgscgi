@@ -1,10 +1,4 @@
-ifeq ($(DESTDIR),)
-else
-PREFIX = $(DESTDIR)
-endif
-ifeq ($(PREFIX),)
-PREFIX = /usr
-endif
+PREFIX ?= /usr
 LIBDIR ?=
 ifeq ($(LIBDIR),)
 ARCHBSZ= $(shell echo $(HOST_ARCH) | sed -e 's/.*64.*/64b/')
@@ -14,6 +8,7 @@ else
 	LIBDIR = lib
 endif
 endif
+INSTALLDIR = $(DESTDIR)$(PREFIX)
 
 LIBRARY = libgscgi-1.0.so
 
@@ -31,21 +26,14 @@ $(LIBRARY):
 
 install: $(LIBRARY) libgscgi-1.0.deps
 	@echo "Installing"
-	@mkdir -p $(PREFIX)/share/vala/vapi
-	@mkdir -p $(PREFIX)/share/pkgconfig
-	@install -m 755 -d $(PREFIX)/lib/pkgconfig/ $(PREFIX)/include/ $(PREFIX)/share/vala/vapi
-	@install -m 755 $(LIBRARY) $(PREFIX)/$(LIBDIR)/
-	@install -m 644 libgscgi-1.0.h $(PREFIX)/include/
-	@install -m 644 libgscgi-1.0.vapi $(PREFIX)/share/vala/vapi
-	@install -m 644 libgscgi-1.0.deps $(PREFIX)/share/vala/vapi
-	@sed -e 's/@LIBDIR@/$(subst /,\/,$(PREFIX))\/$(LIB_DIR)/' -e 's/@INCLUDEDIR@/$(subst /,\/,$(PREFIX))\/include/' libgscgi-1.0.pc.in > $(PREFIX)/share/pkgconfig/libgscgi-1.0.pc
-
-uninstall:
-	@echo "Uninstalling"
-	@rm $(PREFIX)/lib/$(LIBRARY)
-	@rm $(PREFIX)/include/libgscgi-1.0.h
-	@rm $(PREFIX)/share/vala/vapi/libgscgi-1.0.vapi
-	@rm $(PREFIX)/lib/pkgconfig/libgscgi-1.0.pc
+	@mkdir -p $(INSTALLDIR)/share/vala/vapi
+	@mkdir -p $(INSTALLDIR)/share/pkgconfig
+	@install -m 755 -d $(INSTALLDIR)/lib/pkgconfig/ $(INSTALLDIR)/include/ $(INSTALLDIR)/share/vala/vapi
+	@install -m 755 $(LIBRARY) $(INSTALLDIR)/$(LIBDIR)/
+	@install -m 644 libgscgi-1.0.h $(INSTALLDIR)/include/
+	@install -m 644 libgscgi-1.0.vapi $(INSTALLDIR)/share/vala/vapi
+	@install -m 644 libgscgi-1.0.deps $(INSTALLDIR)/share/vala/vapi
+	@sed -e 's/@LIBDIR@/$(subst /,\/,$(INSTALLDIR))\/$(LIB_DIR)/' -e 's/@INCLUDEDIR@/$(subst /,\/,$(INSTALLDIR))\/include/' libgscgi-1.0.pc.in > $(INSTALLDIR)/share/pkgconfig/libgscgi-1.0.pc
 
 clean:
 	@echo "Cleaning"
