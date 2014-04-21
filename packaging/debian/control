@@ -1,10 +1,10 @@
 Source: libgscgi
 Section: unknown
 Priority: extra
-Maintainer: Nicholas Melnick <nick@abstractwankery.com>
-Build-Depends: debhelper (>= 8.0.0), valac-0.14, libglib2.0-dev, gcc, make
-Standards-Version: 3.9.3
-Homepage: <insert the upstream URL, if relevant>
+Maintainer: Nick Melnick <nick@abstractwankery.com>
+Build-Depends: debhelper (>= 8.0.0), valac, libglib2.0-dev
+Standards-Version: 3.9.5
+Homepage: https://github.com/AmbitionFramework/libgscgi
 #Vcs-Git: git://git.debian.org/collab-maint/libgscgi.git
 #Vcs-Browser: http://git.debian.org/?p=collab-maint/libgscgi.git;a=summary
 
