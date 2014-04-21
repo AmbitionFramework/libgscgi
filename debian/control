@@ -1,5 +1,5 @@
 Source: libgscgi
-Section: unknown
+Section: libs
 Priority: extra
 Maintainer: Nick Melnick <nick@abstractwankery.com>
 Build-Depends: debhelper (>= 8.0.0), valac, libglib2.0-dev
@@ -10,6 +10,6 @@ Homepage: https://github.com/AmbitionFramework/libgscgi
 
 Package: libgscgi
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0
+Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0-0
 Description: SCGI library for GObject
  SCGI library for GObject
