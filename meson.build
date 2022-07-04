@@ -25,6 +25,11 @@ lib = shared_library(
   install_dir: [true, true, true]
 )
 
+dep = declare_dependency(
+  link_with: lib,
+  include_directories: include_directories('.')
+)
+
 pc = import('pkgconfig').generate(
   libraries: lib,
   version: meson.project_version(),
